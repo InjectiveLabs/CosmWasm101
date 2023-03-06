@@ -77,3 +77,25 @@ You may wish you install helpful plugins for your IDE:
 
 * [VS Code: Rust Analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 * [Jet Brains](https://www.jetbrains.com/rust/)
+
+### Section 2: Generate CosmWasm Contract
+
+Once rust, CosmWasm and cargo generate have successfully been installed it is possible to create a contract skeleton.
+
+In the terminal 
+
+```bash
+$ cargo generate --git https://github.com/CosmWasm/cw-template.git --name CosmWasm -d minimal=true
+```
+
+Now you should have a directory similar to the following:
+
+```bash
+.
+├── README.md
+└── cosmwasm
+    ├── Cargo.toml
+    ├── LICENSE
+    ├── NOTICE
+    └── src
+```
