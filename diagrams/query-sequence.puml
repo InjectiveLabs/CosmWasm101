@@ -1,0 +1,22 @@
+@startuml
+title User Queries Escrow Contract
+
+actor User as U
+
+box "Cosmos Blockchain"
+  participant "Escrow Contract" as EC
+end box
+
+
+autonumber
+
+U --> EC: query config
+activate EC
+EC --> U: reponse
+deactivate EC
+
+U --> EC: query escrow state
+activate EC
+EC --> U: response
+deactivate EC
+@enduml

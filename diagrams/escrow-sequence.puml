@@ -1,0 +1,44 @@
+@startuml
+title User Escrows and Redeems Funds
+
+
+actor Owner as O
+actor User as U
+
+box "Cosmos Blockchain"
+  participant "Escrow Contract" as EC
+  participant "Token Contract" as TC
+end box
+
+
+autonumber
+
+group Escrow Funds
+
+  U --> TC: send(amount, timelock)
+
+
+  TC --> EC: receive(amount, timelock)
+  activate EC
+
+  EC --> EC: create escrow
+
+  EC --> U: transaction hash
+  deactivate EC
+
+end group
+
+group Redeem Funds
+
+  U --> EC: redeem(amount)
+  activate EC
+
+  EC --> EC: assert(blocktimestamp >= timelock)
+  EC --> TC: send(amount, user)
+  deactivate EC
+
+  TC --> U: send(amount)
+
+
+end group
+@enduml

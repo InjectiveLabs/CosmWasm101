@@ -1,0 +1,29 @@
+@startuml
+
+title Contract Instantiation
+
+
+actor User as A
+
+box "Cosmos Blockchain"
+  participant "Escrow Contract" as ESC
+  participant "Okapi API" as OAPI
+end box
+
+
+autonumber
+
+group Onboarding ceremony
+  OA --> A: Provides:\n\tOnboarding documentation
+  A --> OA: Provides:\n\tCryptographic Identity\n\tHSM Location\n\tTrading venues
+  OA --> A: Provides:\n\tAPI Authorisation Token\n\tGUI Login Details
+end
+
+
+group Alice onboarded
+  AIS --> OAPI: Internal systems can interact\n via HTTP Requests
+  A --> OAPI: Alice can login to the web based GUI
+end
+
+
+@enduml

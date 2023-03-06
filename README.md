@@ -41,6 +41,7 @@ Now setup the development environment. You will need to install:
 * [Rust](https://www.rust-lang.org/tools/install)
 * CosmWasm
 * [Cargo Generate](https://github.com/cargo-generate/cargo-generate)
+* [PlantUML](https://plantuml.com/)
 
 First download rust:
 
@@ -99,3 +100,18 @@ Now you should have a directory similar to the following:
     ├── NOTICE
     └── src
 ```
+
+### Section 3: Design
+
+Now let's use [PlantUML](https://plantuml.com/) to make some component and sequence diagrams. After following installation of PlantUML create a new directory and files as below:
+
+```bash
+$ mkdir diagrams
+$ touch diagrams/component-diagram.puml && touch diagrams/instantiate-sequence.puml && touch diagrams/escrow-sequence.puml && touch diagrams/query-sequence.puml
+```
+
+Following the template shown in Plantuml documentation create a component diagram and sequence diagrams for the following scenario:
+
+* instantiation
+* escrow and redemption
+* queries

@@ -1,0 +1,16 @@
+@startuml
+
+title Component Diagram
+
+interface "Owner" as OW
+interface "User" as US
+
+[Escrow Contract] as ESC
+[Token Contract] as TC
+
+OW --> ESC
+TC <--> ESC
+
+US -left-> TC
+US -right-> ESC
+@enduml
