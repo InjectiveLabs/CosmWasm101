@@ -33,3 +33,47 @@ Navigate to sections 1 in order to find the instructions to get the environment 
 ```bash
 $ git checkout section-1
 ```
+
+### Section 1: Environment Setup
+
+Now setup the development environment. You will need to install:
+
+* [Rust](https://www.rust-lang.org/tools/install)
+* CosmWasm
+* [Cargo Generate](https://github.com/cargo-generate/cargo-generate)
+
+First download rust:
+
+```bash 
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+$ rustup default stable
+```
+
+Check rust has successfully been installed:
+
+```bash
+$ cargo version
+$ cargo 1.67.1 (8ecd4f20a 2023-01-10)
+```
+
+**Note:** If version is lower than 1.55 we need to update run command `$ rustup update stable`
+
+Next add the CosmWasm targets:
+
+```bash
+$ rustup target add wasm32-unknown-unknown
+```
+
+Finally install `cargo generate` this will help us quickly launch a new CosmWasm project.
+
+```bash
+$ cargo install cargo-generate --features vendored-openssl
+$ cargo install cargo-run-script
+```
+
+#### Recommendec IDE Plugins
+
+You may wish you install helpful plugins for your IDE:
+
+* [VS Code: Rust Analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+* [Jet Brains](https://www.jetbrains.com/rust/)
