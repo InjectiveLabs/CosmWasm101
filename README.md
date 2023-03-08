@@ -115,3 +115,32 @@ Following the template shown in Plantuml documentation create a component diagra
 * instantiation
 * escrow and redemption
 * queries
+
+### Section 4: Escrow Contract Framework
+
+Having created diagrams describing the basic functionality of the Escrow contract implement the following:
+
+* Instantiate
+* Execute
+    * Escrow
+    * Redemption
+* Query
+    * Config
+    * Escrow State
+
+First define the storage of the contract which should be config and then a storage containing information about a user's specific storage. To do this use Rust crate [CosmWasm Storage Plus][1].
+
+The config should store:
+
+* CW20 token address
+* Contract owner address
+
+The escrow state should store:
+
+* User address
+* Amount escrowed
+* Time of escrow
+
+## Resources
+
+[1]: https://github.com/CosmWasm/cw-storage-plus
