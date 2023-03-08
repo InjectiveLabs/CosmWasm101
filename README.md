@@ -141,6 +141,38 @@ The escrow state should store:
 * Amount escrowed
 * Time of escrow
 
+### Section 5: Unit Testing
+
+Once the storage has been correctly implemented and additional query functions we are able to start to develop unit tests. Unit tests are of course the first step towards building good software.
+
+Create a file `unit_tests.rs` and using the [cosmwasm-std testing module](https://docs.rs/cosmwasm-std/1.2.2/cosmwasm_std/testing/index.html) we can build a unit test for the contract instantiation and query functions created in the previous section. In addition we will import the `instantiate` and `query` from the escrow contract itself.
+
+Place this skeleton in `unit_tests.rs`:
+
+```
+use crate::contract::{execute, instantiate, query};
+use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
+
+#[test]
+fn test_instantiation() {
+    // FILL THIS IN 
+}
+```
+
+### Section 6: Integration Testing
+
+Having successfully created some unit tests we wish to start developing the execute functions for escrow and redemption. However, as they involve a CW20 token it will not be possible to create these tests as unit tests. Rather we will need to create a mock blockchain environment and create integration tests.
+
+To do this we will leverage the [cw-multi-test package](https://docs.rs/cw-multi-test/0.16.2/cw_multi_test/).
+
+In order to complete this section we will:
+
+* Add `cw-multi-test` as a dev dependency in our `Cargo.toml`
+* Create the functions:
+    * Escrow: should allow a user to send CW20 token to the escrow contract which receives and locks the tokens a period of time
+    * Redeem: should allow a user to redeem their locked tokens once the period has expired
+* Use `cw-multi-test` to create integration tests
+
 ## Resources
 
 [1]: https://github.com/CosmWasm/cw-storage-plus
