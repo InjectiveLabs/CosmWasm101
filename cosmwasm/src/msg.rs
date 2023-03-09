@@ -1,5 +1,6 @@
 use cosmwasm_schema::cw_serde;
 use cosmwasm_std::Uint128;
+use cw20::Cw20ReceiveMsg;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -10,8 +11,13 @@ pub struct InstantiateMsg {
 
 #[cw_serde]
 pub enum ExecuteMsg {
-    Escrow { amount: u128, time: u64 },
-    Redeem { amount: u128 },
+    Receive(Cw20ReceiveMsg),
+    Redeem {},
+}
+
+#[cw_serde]
+pub enum Cw20HookMsg {
+    Escrow { time: u64 },
 }
 
 #[cw_serde]

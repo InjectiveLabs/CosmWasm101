@@ -1,8 +1,8 @@
 use crate::contract::{instantiate, query};
-use crate::msg::{ConfigResponse, EscrowResponse, InstantiateMsg, QueryMsg};
+use crate::msg::{ConfigResponse, InstantiateMsg, QueryMsg};
 
+use cosmwasm_std::from_binary;
 use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
-use cosmwasm_std::{from_binary, Addr, Uint128};
 
 #[test]
 fn test_instantiation() {

@@ -1,10 +1,13 @@
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
-use cosmwasm_std::{to_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
-// use cw2::set_contract_version;
+use cosmwasm_std::{
+    from_binary, to_binary, Addr, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult,
+};
+use cw20::Cw20ReceiveMsg;
 
 use crate::error::ContractError;
-use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
+use crate::execute::{execute_escrow, execute_redeem};
+use crate::msg::{Cw20HookMsg, ExecuteMsg, InstantiateMsg, QueryMsg};
 use crate::query::{query_config, query_escrow};
 use crate::state::{Config, CONFIG};
 
@@ -34,12 +37,34 @@ pub fn instantiate(
 
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn execute(
-    _deps: DepsMut,
-    _env: Env,
-    _info: MessageInfo,
-    _msg: ExecuteMsg,
+    deps: DepsMut,
+    env: Env,
+    info: MessageInfo,
+    msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
-    unimplemented!()
+    match msg {
+        ExecuteMsg::Receive(msg) => receive_cw20(deps, env, info, msg),
+        ExecuteMsg::Redeem {} => execute_redeem(deps, env, info.sender),
+    }
+}
+
+pub fn receive_cw20(
+    deps: DepsMut,
+    env: Env,
+    info: MessageInfo,
+    cw20_msg: Cw20ReceiveMsg,
+) -> Result<Response, ContractError> {
+    match from_binary(&cw20_msg.msg) {
+        Ok(Cw20HookMsg::Escrow { time }) => execute_escrow(
+            deps,
+            env,
+            Addr::unchecked(cw20_msg.sender),
+            info.sender,
+            cw20_msg.amount,
+            time,
+        ),
+        Err(err) => Err(ContractError::Std(err)),
+    }
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
